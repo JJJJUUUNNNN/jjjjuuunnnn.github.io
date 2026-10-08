@@ -5,11 +5,16 @@ import BaseHead from '../components/BaseHead.astro'
 import Footer from '../components/Footer.astro'
 import FormattedDate from '../components/FormattedDate.astro'
 import Header from '../components/Header.astro'
-import { undefined } from 'astro:schema'
 
-type Props = CollectionEntry<'blog'>['data']
+import type { MarkdownHeading } from 'astro'
 
-const { title, description, tags, pubDate, updatedDate, heroImage } = Astro.props
+type Props = CollectionEntry<'blog'>['data'] & {
+  headings?: MarkdownHeading[]
+}
+
+const { title, description, tags, pubDate, updatedDate, heroImage, headings = [] } = Astro.props
+
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3)
 ---
 
 <html lang="zh-CN">
@@ -74,6 +79,36 @@ const { title, description, tags, pubDate, updatedDate, heroImage } = Astro.prop
       .tags a:hover {
         background: rgb(var(--gray-light));
       }
+      .toc {
+        margin-bottom: 2rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+      }
+      .toc h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.125rem;
+      }
+      .toc ul {
+        margin: 0;
+        padding-left: 1.25rem;
+      }
+      .toc li {
+        margin: 0.4rem 0;
+      }
+      .toc .toc-subheading {
+        margin-left: 1rem;
+      }
+      .toc a {
+        text-decoration: none;
+      }
+      .toc a:hover {
+        text-decoration: underline;
+      }
+      .prose :global(h2[id]),
+      .prose :global(h3[id]) {
+        scroll-margin-top: 1rem;
+      }
     </style>
   </head>
 
@@ -110,6 +145,21 @@ const { title, description, tags, pubDate, updatedDate, heroImage } = Astro.prop
               )
             }
           </div>
+          {
+            toc.length > 0 && (
+              <nav class="toc" aria-label="文章目录" data-pagefind-ignore>
+                <h2>文章目录</h2>
+                <ul>
+                  {toc.map((heading) => (
+                    <li class:list={{ 'toc-subheading': heading.depth === 3 }}>
+                      <a href={`#${encodeURIComponent(heading.slug)}`}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )
+          }
+          <slot />
           <slot />
         </div>
       </article>
