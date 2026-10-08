@@ -1,0 +1,65 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const isDev = import.meta.env.DEV;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead
+			title={`搜索 | ${SITE_TITLE}`}
+			description="搜索博客文章的标题和正文"
+		/>
+		{!isDev && (
+			<link
+				rel="stylesheet"
+				href="/pagefind/pagefind-ui.css"
+			/>
+		)}
+		<style>
+			#search {
+				--pagefind-ui-primary: rgb(var(--accent));
+				--pagefind-ui-text: rgb(var(--gray-dark));
+				--pagefind-ui-font: inherit;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>搜索文章</h1>
+			{isDev ? (
+				<p>
+					搜索索引在构建后生成，请运行 pnpm run build，
+					再通过 pnpm run preview 测试搜索。
+				</p>
+			) : (
+				<div id="search"></div>
+			)}
+			<noscript>请启用 JavaScript 来搜索文章。</noscript>
+		</main>
+		<Footer />
+
+		{!isDev && (
+			<>
+				<script is:inline src="/pagefind/pagefind-ui.js"></script>
+				<script is:inline>
+					new PagefindUI({
+						element: '#search',
+						bundlePath: '/pagefind/',
+						showSubResults: true,
+						showImages: false,
+						translations: {
+							placeholder: '搜索文章标题或正文',
+							zero_results: '没有找到“[SEARCH_TERM]”的相关内容',
+						},
+					});
+				</script>
+			</>
+		)}
+	</body>
+</html>
