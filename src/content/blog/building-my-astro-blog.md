@@ -2,6 +2,10 @@
 title: '我的 Astro 博客搭建记录'
 description: '从本地开发到 GitHub Pages，记录个人博客的创建与自动部署过程。'
 pubDate: '2026-10-07'
+tags: 
+  - Astro
+  - TypeScript
+  - GitHub Pages
 ---
 
 这是我个人技术博客的第一篇文章，记录目前已经完成的搭建过程。
