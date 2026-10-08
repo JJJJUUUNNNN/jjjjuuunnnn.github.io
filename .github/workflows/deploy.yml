@@ -21,11 +21,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Install dependencies, build, and upload
+      - name: Check, build, and upload
         uses: withastro/action@v6
         with:
           node-version: "22.14.0"
           package-manager: pnpm@12.5.1
+          build-cmd: pnpm run check && pnpm run build
 
   deploy:
     needs: build
