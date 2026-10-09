@@ -1,31 +1,26 @@
 ---
-title: 'Using MDX'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jun 01 2024'
+title: '用 MDX 在 Astro 博客中嵌入交互组件'
+description: '使用 Astro 组件和 TypeScript，在 Markdown 文章中实现可交互的计数器。'
+pubDate: '2024-06-01'
+tags: ['Astro', 'MDX', 'TypeScript']
 heroImage: '../../assets/blog-placeholder-5.jpg'
 ---
 
-This theme comes with the [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) integration installed and configured in your `astro.config.mjs` config file. If you prefer not to use MDX, you can disable support by removing the integration from your config file.
+import Counter from '../../components/Counter.astro';
 
-## Why MDX?
+MDX 允许我们在 Markdown 文章中导入组件，让读者直接操作示例。
 
-MDX is a special flavor of Markdown that supports embedded JavaScript & JSX syntax. This unlocks the ability to [mix JavaScript and UI Components into your Markdown content](https://docs.astro.build/en/guides/integrations-guide/mdx/#mdx-in-astro) for things like interactive charts or alerts.
+## 交互式计数器
 
-If you have existing content authored in MDX, this integration will hopefully make migrating to Astro a breeze.
+试着点击下面的按钮，增加、减少或重置计数：
 
-## Example
+<Counter />
 
-Here is how you import and use a UI component inside of MDX.  
-When you open this page in the browser, you should see the clickable button below.
+## 在文章中使用组件
 
-import HeaderLink from '../../components/HeaderLink.astro';
+先导入组件，再将它放到需要展示的位置：
 
-<HeaderLink href="#" onclick="alert('clicked!')">
-	Embedded component in MDX
-</HeaderLink>
+```jsx
+import Counter from '../../components/Counter.astro';
 
-## More Links
-
-- [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)
-- [Astro Usage Documentation](https://docs.astro.build/en/basics/astro-pages/#markdownmdx-pages)
-- **Note:** [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives) are still required to create interactive components. Otherwise, all components in your MDX will render as static HTML (no JavaScript) by default.
+<Counter />

@@ -1,0 +1,91 @@
+<div class="counter" data-counter data-pagefind-ignore>
+  <span class="label">当前计数</span>
+  <output aria-live="polite" aria-atomic="true">0</output>
+
+  <div class="actions">
+    <button type="button" data-action="decrease" aria-label="减一">−1</button>
+    <button type="button" data-action="reset">重置</button>
+    <button type="button" data-action="increase" aria-label="加一">+1</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-counter]').forEach((counter) => {
+    const output = counter.querySelector<HTMLOutputElement>('output')
+    if (!output) return
+
+    let count = 0
+
+    counter.querySelectorAll<HTMLButtonElement>('button').forEach((button) => {
+      button.addEventListener('click', () => {
+        switch (button.dataset.action) {
+          case 'decrease':
+            count -= 1
+            break
+          case 'increase':
+            count += 1
+            break
+          case 'reset':
+            count = 0
+            break
+        }
+
+        output.value = String(count)
+      })
+    })
+  })
+</script>
+
+<style>
+  .counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 12px;
+    background: var(--header-bg);
+  }
+
+  .label {
+    color: rgb(var(--gray));
+    font-size: 0.875rem;
+  }
+
+  output {
+    color: rgb(var(--black));
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  button {
+    padding: 0.6rem 1rem;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 8px;
+    background: var(--page-bg);
+    color: rgb(var(--black));
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
