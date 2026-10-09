@@ -19,7 +19,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
 
 <html lang="zh-CN">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={heroImage} type={Astro.url.pathname.startsWith('/blog/') ? 'article' : 'website'} />
     <style>
       main {
         width: calc(100% - 2em);
