@@ -117,7 +117,11 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
     <main>
       <article>
         <div class="hero-image">
-          {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+          {
+            heroImage && (
+              <Image src={heroImage} width={1020} height={510} widths={[400, 640, 800, 1020]} sizes="(max-width: 1056px) calc(100vw - 2em), 1020px" loading="eager" fetchpriority="high" alt="" />
+            )
+          }
         </div>
         <div class="prose" data-pagefind-body={Astro.url.pathname.startsWith('/blog/') ? '' : undefined}>
           <div class="title">
