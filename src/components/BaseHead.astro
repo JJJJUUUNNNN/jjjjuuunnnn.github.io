@@ -21,6 +21,26 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- 脚本在页面正文显示前执行，减少刷新时先亮后暗的闪烁。存储被浏览器禁用时，主题仍可以正常使用 -->
+<script is:inline>
+	(() => {
+		let savedTheme = null;
+
+		try {
+			savedTheme = localStorage.getItem('blog-theme');
+		} catch {}
+
+		const theme =
+			savedTheme === 'light' || savedTheme === 'dark'
+				? savedTheme
+				: window.matchMedia('(prefers-color-scheme: dark)').matches
+					? 'dark'
+					: 'light';
+
+		document.documentElement.dataset.theme = theme;
+	})();
+</script>
+
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />

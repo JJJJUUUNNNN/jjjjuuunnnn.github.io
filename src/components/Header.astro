@@ -14,6 +14,7 @@ import HeaderLink from './HeaderLink.astro'
       <HeaderLink href="/tags/">Tags</HeaderLink>
       <HeaderLink href="/search/">Search</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
+      <button id="theme-toggle" type="button" aria-label="暗色模式" aria-pressed="false"> 暗色模式 </button>
     </div>
     <div class="social-links">
       <a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -46,11 +47,49 @@ import HeaderLink from './HeaderLink.astro'
     </div>
   </nav>
 </header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#theme-toggle')
+  const root = document.documentElement
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+  let userSelected = false
+
+  try {
+    const savedTheme = localStorage.getItem('blog-theme')
+    userSelected = savedTheme === 'light' || savedTheme === 'dark'
+  } catch {}
+
+  function updateButton() {
+    const isDark = root.dataset.theme === 'dark'
+    button?.setAttribute('aria-pressed', String(isDark))
+  }
+
+  updateButton()
+
+  button?.addEventListener('click', () => {
+    const theme = root.dataset.theme === 'dark' ? 'light' : 'dark'
+    root.dataset.theme = theme
+    userSelected = true
+
+    try {
+      localStorage.setItem('blog-theme', theme)
+    } catch {}
+
+    updateButton()
+  })
+
+  systemTheme.addEventListener('change', (event) => {
+    if (!userSelected) {
+      root.dataset.theme = event.matches ? 'dark' : 'light'
+      updateButton()
+    }
+  })
+</script>
 <style>
   header {
     margin: 0;
     padding: 0 1em;
-    background: white;
+    /* background: white; */
+    background: var(--header-bg);
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
   }
   h2 {
@@ -69,7 +108,8 @@ import HeaderLink from './HeaderLink.astro'
   }
   nav a {
     padding: 1em 0.5em;
-    color: var(--black);
+    /* color: var(--black); */
+    color: rgb(var(--black));
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
@@ -90,11 +130,33 @@ import HeaderLink from './HeaderLink.astro'
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+		align-items: center;
   }
 
   @media (max-width: 720px) {
     nav {
       flex-wrap: wrap;
     }
+  }
+
+  #theme-toggle {
+    margin: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgb(var(--gray));
+    border-radius: 8px;
+    background: var(--header-bg);
+    color: rgb(var(--black));
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  #theme-toggle:hover {
+    background: rgb(var(--gray-light));
+  }
+
+  #theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 </style>

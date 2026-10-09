@@ -1,6 +1,6 @@
 <section class="comments" aria-labelledby="comments-title" data-pagefind-ignore>
   <h2 id="comments-title">评论</h2>
-  <script
+  <!-- <script
     is:inline
     src="https://giscus.app/client.js"
     data-repo="JJJJUUUNNNN/jjjjuuunnnn.github.io"
@@ -16,8 +16,55 @@
     data-lang="zh-CN"
     crossorigin="anonymous"
     async
-  ></script>
+  ></script> -->
+  <div class="giscus" id="giscus-container"></div>
 </section>
+
+<script>
+  const container = document.querySelector<HTMLElement>('#giscus-container')
+
+  if (container) {
+    const root = document.documentElement
+    const getTheme = () => (root.dataset.theme === 'dark' ? 'dark' : 'light')
+
+    function syncTheme() {
+      container?.querySelector<HTMLIFrameElement>('iframe.giscus-frame')?.contentWindow?.postMessage({ giscus: { setConfig: { theme: getTheme() } } }, 'https://giscus.app')
+    }
+
+    // 评论加载期间切换主题，也能在 iframe 加载后同步。
+    container.addEventListener('load', syncTheme, true)
+
+    new MutationObserver(syncTheme).observe(root, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
+
+    const script = document.createElement('script')
+    script.src = 'https://giscus.app/client.js'
+    script.async = true
+    script.crossOrigin = 'anonymous'
+
+    const attributes = {
+      'data-repo': 'JJJJUUUNNNN/jjjjuuunnnn.github.io',
+      'data-repo-id': 'R_kgDOU_UKtg',
+      'data-category': 'Announcements',
+      'data-category-id': 'DIC_kwDOU_UKts4DHYiK',
+      'data-mapping': 'pathname',
+      'data-strict': '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-input-position': 'bottom',
+      'data-theme': getTheme(),
+      'data-lang': 'zh-CN',
+    }
+
+    for (const [name, value] of Object.entries(attributes)) {
+      script.setAttribute(name, value)
+    }
+
+    container.appendChild(script)
+  }
+</script>
 
 <style>
   .comments {
