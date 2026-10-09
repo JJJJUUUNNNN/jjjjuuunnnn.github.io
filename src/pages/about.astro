@@ -1,64 +1,153 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	tags={[]}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead
+      title={`关于我 | ${SITE_TITLE}`}
+      description="我是 Jun，一名前端开发者，关注交互体验、类型安全与工程自动化，通过文章和可运行的作品记录技术实践。"
+    />
+  </head>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+  <body>
+    <Header />
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+    <main>
+      <p class="eyebrow">ABOUT / JUN</p>
+      <h1>把想法做成界面，<br />把实践沉淀成作品。</h1>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+      <p class="intro">
+        你好，我是 Jun，一名前端开发者。
+        我关注界面的交互与表达，也关注支撑它们的代码结构、
+        类型约束和交付流程。
+      </p>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+      <section aria-labelledby="focus-title">
+        <h2 id="focus-title">我关注什么</h2>
+        <ul>
+          <li>
+            <strong>交互与阅读体验：</strong>
+            从页面布局、移动端适配到主题切换，让内容更易读、操作更自然。
+          </li>
+          <li>
+            <strong>类型安全与组件设计：</strong>
+            使用 TypeScript 表达数据约束，把可复用的交互封装成组件。
+          </li>
+          <li>
+            <strong>工程自动化：</strong>
+            将类型检查、构建和部署串联起来，让每次改动都经过验证再发布。
+          </li>
+          <li>
+            <strong>技术表达：</strong>
+            用文章解释实现思路，用可运行的演示展示实际效果。
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="project-title">
+        <h2 id="project-title">这个博客，也是我的实践项目</h2>
+        <p>
+          我基于 Astro、TypeScript 和 MDX 搭建了这个博客，
+          并逐步完善内容组织、交互体验和自动化部署。
+        </p>
+        <ul>
+          <li>通过 Content Collections 和 Schema 校验文章元数据。</li>
+          <li>提供文章标签、目录和 Pagefind 静态全文搜索。</li>
+          <li>支持亮暗主题切换，并同步评论区主题。</li>
+          <li>接入 Giscus，将评论与 GitHub Discussions 关联。</li>
+          <li>在 MDX 文章中嵌入 TypeScript 驱动的交互组件。</li>
+          <li>通过 GitHub Actions 执行类型检查、构建并部署到 GitHub Pages。</li>
+        </ul>
+        <p>
+          从内容到界面，再到发布流程，每一部分都能在这个站点中实际体验。
+        </p>
+
+        <div class="links">
+          <a
+            href="https://github.com/JJJJUUUNNNN/jjjjuuunnnn.github.io"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            查看项目源码 ↗
+          </a>
+          <a href="/blog/using-mdx/">体验交互演示 →</a>
+        </div>
+      </section>
+
+      <section aria-labelledby="writing-title">
+        <h2 id="writing-title">我会在这里分享什么</h2>
+        <p>
+          前端开发中的实现思路、问题排查和工程实践，
+          以及把一个想法逐步做成作品的过程。
+          我希望每篇文章都能讲清楚：为什么这样设计、
+          如何实现，以及怎样验证效果。
+        </p>
+        <a href="/blog/">阅读我的文章 →</a>
+      </section>
+
+      <section aria-labelledby="contact-title">
+        <h2 id="contact-title">找到我</h2>
+        <p>
+          欢迎通过文章评论交流，也可以在 GitHub 查看我的代码和项目。
+        </p>
+        <a
+          href="https://github.com/JJJJUUUNNNN"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub · JJJJUUUNNNN ↗
+        </a>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .eyebrow {
+    margin: 0 0 1rem;
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.25;
+  }
+
+  .intro {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    color: rgb(var(--gray));
+  }
+
+  section {
+    margin-top: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  ul {
+    padding-left: 1.25em;
+  }
+
+  li + li {
+    margin-top: 0.75rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+</style>
